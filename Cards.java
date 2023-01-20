@@ -14,7 +14,8 @@
 import java.util.Arrays;
 
 public class Cards{
-private String[][] deck = new String[4][13];
+
+    private String[][] deck = new String[4][13];
 // construct a single deck of cards
     public Cards(){
         this.deck=setDeck();
@@ -140,6 +141,7 @@ private String[][] deck = new String[4][13];
         }
         return suit;
     }
+    //the extra arrays made the print out cleaner than one big matrix 
     public String toString() {
         String []deckString1=new String[13];
         String []deckString2=new String[13];
