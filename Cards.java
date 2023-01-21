@@ -18,22 +18,22 @@ public class Cards{
     private String[][] deck = new String[4][13];
 // construct a single deck of cards
     public Cards(){
-        this.deck=setDeck();
+        this.deck=deck();
     }
 // this builds the deck of cards and stores it in a 4x13 matrix
 //rows(i)= suits coloumn(j) = rank
 // colomn zero is Ace coloumn 1 is Two....coloumn 12 is King
-    public String[][] setDeck(){
+    public String[][] deck(){
             for(int i=0;i<4;i++){
                 for (int j=0;j<13;j++){
-                    this.deck[i][j]=getCard(i,j);
+                    this.deck[i][j]=setdeck(i,j);
                 }
             }
         return this.deck;
     }
     // this determines what the card is based on position in matrix
     // i is the row and j is the coloumn
-    public String getCard(int i, int j){ 
+    public String setdeck(int i, int j){ 
         String[] ranks= {"ACE","TWO","THREE","FOUR","FIVE","SIX","SEVEN","EIGHT","NINE","TEN","JACK","QUEEN","KING"};
         String rank,suit,card=" ";
         switch(j){
@@ -71,7 +71,7 @@ public class Cards{
         case 5: 
             rank=ranks[5];
             suit= getSuit(i);
-            card=rank+" OF "+suit+"'S ";
+            card=rank;
         break;
         //Seven + suit
         case 6: 
@@ -143,31 +143,7 @@ public class Cards{
     }
     //the extra arrays made the print out cleaner than one big matrix 
     public String toString() {
-        String []deckString1=new String[13];
-        String []deckString2=new String[13];
-        String []deckString3=new String[13];
-        String []deckString4=new String[13];
-            for(int i=0;i<4;i++){
-                if(i==0){
-                    for (int j=0;j<13;j++){
-                        deckString1[j]=this.deck[i][j];
-                    }
-                }else if(i==1){
-                    for (int j=0;j<13;j++){
-                        deckString2[j]=this.deck[i][j];
-                    }  
-                }else if(i==2){
-                    for (int j=0;j<13;j++){
-                        deckString3[j]=this.deck[i][j];
-                    }
-                }else {
-                    for (int j=0;j<13;j++){
-                        deckString4[j]=this.deck[i][j];
-                    }
-                }
-        
-        }
-        return Arrays.toString(deckString1)+"\n"+Arrays.toString(deckString2)+"\n"+Arrays.toString(deckString3)+"\n"+Arrays.toString(deckString4);
+        return Arrays.deepToString(deck);
     }
-
+   
 }
