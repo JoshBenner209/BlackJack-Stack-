@@ -18,7 +18,7 @@ public class Cards{
     private String[][] deck = new String[4][13];
 // construct a single deck of cards
     public Cards(){
-        this.deck=deck();
+        deck=deck();
     }
 // this builds the deck of cards and stores it in a 4x13 matrix
 //rows(i)= suits coloumn(j) = rank
@@ -26,10 +26,10 @@ public class Cards{
     public String[][] deck(){
             for(int i=0;i<4;i++){
                 for (int j=0;j<13;j++){
-                    this.deck[i][j]=setdeck(i,j);
+                    deck[i][j]=setdeck(i,j);
                 }
             }
-        return this.deck;
+        return deck;
     }
     // this determines what the card is based on position in matrix
     // i is the row and j is the coloumn

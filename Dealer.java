@@ -1,47 +1,30 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Stack;
+
 
 /* Dealer class */
 
 public class Dealer extends BlackJack{
-    private Stack <String> shuffledDeck = new Stack <String>();
-    private Cards card= new Cards(); 
-    
-    public Dealer(){
-        this.shuffledDeck=shuffle();
-        ;
-    }
-    public Stack <String> shuffle() {
-        ArrayList<String> shuffleArray= new ArrayList<String>();
-        for(int i=0;i<4;i++){
-            for (int j=0;j<13;j++){
-                shuffleArray.add(card.setdeck(i, j)); 
-            }  
+private boolean done;
+
+public Dealer(){
+    done= false;
+}
+    public boolean dealerMove(){
+        if(sum>=17){
+            done=true;
+            faceUp();
+        }else{
+            hit();
         }
-        Collections.shuffle(shuffleArray);
-        for (int i=0; i<shuffleArray.size(); i++){
-            this.shuffledDeck.push(shuffleArray.get(i));
-        }
-        return this.shuffledDeck;
-        }
-    
-    public String hit(){
-        return shuffledDeck.pop();
-
+        return done;
     }
+    public void showCard(){
 
-        public String toString(){
-    
-        return shuffledDeck.toString(); // change this before submiting. 
-
-    }            
-                    
+            System.out.print("Delears Second Card "+ hand.get(hand.size()-1));
+        }
+    public void faceUp(){
+        System.out.println("Dealer's hand:");
+        for (int i = 0; i<hand.size();i++){
+            System.out.println(hand.get(i));
+        } 
     }
-
-                
-
-
-
-
-
+}

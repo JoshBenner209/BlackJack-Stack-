@@ -2,19 +2,36 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
 public class BlackJack {
-    private Stack <String> shuffledDeck = new Stack <String>();
+    private static Stack <String> shuffledDeck = new Stack <String>();
     private Cards card= new Cards(); 
-    //private boolean stand;
-    private int sum;
-    private ArrayList<String> hand = new ArrayList<String>();
+    private final int BLACKJACK=21;
+    protected  int sum;
+    protected boolean stand;
+    protected ArrayList<String> hand = new ArrayList<String>();
     
     
     public BlackJack(){
-        this.shuffledDeck=shuffle();
+        shuffledDeck=shuffle();
         // start with two cards in hand
-        sum= gethandSum();
-        for(int i=0;i<2;i++){   
-        hand=hit();
+        sum=gethandSum();
+        stand= false;
+    }
+    public Double payOut(String result, double wager){
+        double pay=0;
+        if(sum>21|| result.startsWith("L")){
+            System.out.println("bust!");
+            pay=0;
+        }else {
+            pay+= wager*1.5;
+        }
+        return pay;
+    }
+    public void endRound(){
+        if (sum==BLACKJACK){
+        System.out.println("blackJack!");
+        }
+        if (stand==true){
+            System.out.print("End Round");
         }
     }
     //shuffles and stores deck in stack
@@ -27,21 +44,25 @@ public class BlackJack {
         }
         Collections.shuffle(shuffleArray);
         for (int i=0; i<shuffleArray.size(); i++){
-            this.shuffledDeck.push(shuffleArray.get(i));
+            shuffledDeck.push(shuffleArray.get(i));
         }
-        return this.shuffledDeck;
+        return shuffledDeck;
         }
     // deal another card
-    public ArrayList<String> hit(){
-         this.hand.add(shuffledDeck.pop());
+    public  ArrayList<String> hit(){
+         hand.add(shuffledDeck.pop());
+         sum+=gethandSum();
         return hand;
       
         //return shuffledDeck.pop();
     }
-    public String faceUp(){
-    return hand.toString();        
+    public void faceUp(){
+        System.out.println("Your current Hand");
+        for (int i = 0; i<hand.size();i++){
+        System.out.println(hand.get(i));
+    }       
     }
-    public int gethandSum(){
+    public  int gethandSum(){
     int value=0;
         for(int i=0;i<hand.size();i++){
             String read = hand.get(i);
@@ -94,8 +115,11 @@ public class BlackJack {
             default:
             break;
         }
-       sum+=value;
+       
         }
+        return value;
+    }
+    public int getSum(){
         return sum;
     }
 
@@ -103,5 +127,10 @@ public class BlackJack {
     
         return shuffledDeck.toString(); // change this before submiting. 
     }            
-                    
+     public void getRules(){
+        System.out.println("The rules of the game are as follows:\n"+
+        " if you are closer to 21 than the dealer, you win!\n"+
+        "if you and the dealer tie no money is lost or paid out.\n"+
+        "if you win you will get paid 1.5 time your wager. Good Luck!");
+     }               
     }
