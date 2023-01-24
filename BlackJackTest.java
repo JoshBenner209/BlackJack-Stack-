@@ -28,26 +28,27 @@ public class BlackJackTest{
         // player goes first
         do{  play=playerOne.getMove(); // this give the player options. until player stands
         }while(play); // if player stands play= false
-      
+        playerOne.faceUp();
         //dealer plays hand last
         boolean dealPlay=true;
         do{
             dealPlay=deal.dealerMove(); //similar to players move
             deal.faceUp();//show dealers cards
-        }while(dealPlay);
+        }while(dealPlay); // once dealer is done dealPlay=false
         System.out.println("\n");
         System.out.println("dealer sum "+ deal.getSum()); //print out dealers sum
         //check to see who wins
-        if(deal.getSum()>21 && playerOne.getSum()<21){
+        if(deal.getSum()>21 && playerOne.getSum()<21){ //you win
             win=true;
             playerOne.payOut(win);
-        }else if (deal.getSum()-playerOne.getSum()>0){
+        }else if (deal.getSum()-playerOne.getSum()>0){ //you lose
             win=false;
             playerOne.payOut(win);
-        }else if(playerOne.getSum()>21){
+        }else if(playerOne.getSum()>21){ //you lose
             win=false;
             playerOne.payOut(win);
-        }else {
+            System.out.println("Bust!");
+        }else { // you win
             win=true;
             playerOne.payOut(win);
         }      

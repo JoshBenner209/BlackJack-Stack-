@@ -14,7 +14,6 @@ public Dealer(){
             faceUp();
         }else{
             hit();
-            gethandSum();
             done=false;
         }
         return done;

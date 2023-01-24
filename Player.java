@@ -37,19 +37,14 @@ public class Player extends BlackJack {
        boolean play= true;
             System.out.println("Sum: "+sum);
             System.out.println();
-            if(sum>21){
-                System.out.println("BUST!");
-                play=false;
-            }
             System.out.println(getKeyBindings());
             System.out.println("\n");
             System.out.println("please make your move");
             String move= scan.next();
             scan.nextLine();
-           
             switch(move.toUpperCase()){
                 case "SD":
-                    play=false;
+                    play=!play;
                 break;
                 case "HT":
                    hit();
@@ -57,15 +52,13 @@ public class Player extends BlackJack {
                 break;
                 case "SR":
                     wager=wager*.5;
-                    play=false;
+                    play=!play;
                 break;
                 case "DD":
                     hit();
-                    faceUp();
                     wager=wager*2;
                     System.out.println("Sum: "+sum);
-                   
-                    
+                    play=!play;
                 break;
                 case "ST":
                     //may not get done!!  :(
@@ -73,9 +66,6 @@ public class Player extends BlackJack {
                 default:
                 System.out.println("invalid response try again");
                 break;
-            }
-            if(move.equals("dd")|| move.equals("DD")){
-                play=false;
             }
         return play;
     }
@@ -101,26 +91,28 @@ public class Player extends BlackJack {
                 switch(subRead){    
                     case "ACE":
                     faceUp();
-                    System.out.println("Sum: "+sum);
-                    boolean error=false;
-                    while(error=!error){
-                        try{System.out.println("Do you want the Ace to be a 1 or 11?");   
-                        answer= scan.nextInt();    
-                        if(answer!=1|| answer !=11){
-                        error=true;
+                    if(sum!=0){ // if ace is first card dealt skip all this and assign it
+                        System.out.println("Sum: "+sum);
+                        boolean error=false;
+                        while(error=!error){
+                            try{System.out.println("Do you want the Ace to be a 1 or 11?");   
+                            answer= scan.nextInt();    
+                            if(answer!=1|| answer !=11){
+                            error=true;
+                            }
+                            }catch(InputMismatchException e){
+                                System.out.println();
+                                System.out.println("Error Please enter integer 1 or 11");
+                                scan.nextLine();
+                            }
                         }
-                        }catch(InputMismatchException e){
-                            System.out.println();
-                            System.out.println("Error Please enter integer 1 or 11");
-                            scan.nextLine();
-                        }
-                    }
-                       
+                    }else{
                         if(sum>21||answer ==1){
                             value=1;
                         }else{
                             value=11;
-                        }   
+                        } 
+                    }  
                     break;
                     case "TWO":
                         value=2;
