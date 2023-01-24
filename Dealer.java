@@ -14,17 +14,21 @@ public Dealer(){
             faceUp();
         }else{
             hit();
+            gethandSum();
+            done=false;
         }
         return done;
     }
     public void showCard(){
 
-            System.out.print("Delears Second Card "+ hand.get(hand.size()-1));
+            System.out.print("Delears Second Card: "+ hand.get(hand.size()-1));
+            System.out.println();
         }
     public void faceUp(){
-        System.out.println("Dealer's hand:");
+        System.out.print("Dealer's hand: ");
         for (int i = 0; i<hand.size();i++){
-            System.out.println(hand.get(i));
-        } 
+            System.out.print(hand.get(i)+", ");
+        }
+        System.out.println(); 
     }
 }

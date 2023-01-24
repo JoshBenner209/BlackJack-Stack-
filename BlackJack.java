@@ -16,16 +16,6 @@ public class BlackJack {
         sum=gethandSum();
         stand= false;
     }
-    public Double payOut(String result, double wager){
-        double pay=0;
-        if(sum>21|| result.startsWith("L")){
-            System.out.println("bust!");
-            pay=0;
-        }else {
-            pay+= wager*1.5;
-        }
-        return pay;
-    }
     public void endRound(){
         if (sum==BLACKJACK){
         System.out.println("blackJack!");
@@ -57,10 +47,11 @@ public class BlackJack {
         //return shuffledDeck.pop();
     }
     public void faceUp(){
-        System.out.println("Your current Hand");
+        System.out.print("Your current Hand: ");
         for (int i = 0; i<hand.size();i++){
-        System.out.println(hand.get(i));
-    }       
+        System.out.print(hand.get(i)+", ");
+    }  
+    System.out.println();     
     }
     public  int gethandSum(){
     int value=0;
@@ -129,8 +120,13 @@ public class BlackJack {
     }            
      public void getRules(){
         System.out.println("The rules of the game are as follows:\n"+
-        " if you are closer to 21 than the dealer, you win!\n"+
-        "if you and the dealer tie no money is lost or paid out.\n"+
-        "if you win you will get paid 1.5 time your wager. Good Luck!");
+        "To start the game you'll be asked to make a wager.\n"+    
+        "Next you'll be dealt two cards and so will the dealer.\n"+
+        "You will only see the dealers second card.\n\n"+
+        "If you are closer to 21 than the dealer, you win!\n"+
+        "If you and the dealer tie no money is lost or paid out.\n"+
+        "If you go over 21 you automatically lose, because the house always "+
+        "wins ;)\nIf you win you will get paid 1.5 time your wager. \n"+
+        "Good Luck!!!");
      }               
     }

@@ -4,14 +4,10 @@ import java.util.InputMismatchException;
 public class Player extends BlackJack {
     Scanner scan;
     private double wager;
-    private boolean stand;
-
-  
-    
     public Player(Scanner scan){
        this.scan=scan;  
-        wager=getWager();
-        stand=false;
+       System.out.println(); 
+       wager=getWager();
     }
     private double getWager() {
         boolean error=false;
@@ -26,21 +22,32 @@ public class Player extends BlackJack {
             }
         }
         return wager;
-    
+    }
+    public void payOut(boolean win){
+        double payOut=0.00;
+        if (win==true){
+            payOut+=wager*1.5;
+            System.out.println("You won!: $"+(payOut-wager));
+        }else{
+            payOut=0.00;
+            System.out.println("You lost!: $"+(payOut-wager));
+        } 
     }   
     public boolean getMove(){
        boolean play= true;
             System.out.println("Sum: "+sum);
+            System.out.println();
             if(sum>21){
                 System.out.println("BUST!");
                 play=false;
             }
-            System.out.println("please make your move");
             System.out.println(getKeyBindings());
+            System.out.println("\n");
+            System.out.println("please make your move");
             String move= scan.next();
             scan.nextLine();
-            move.toUpperCase();
-            switch(move){
+           
+            switch(move.toUpperCase()){
                 case "SD":
                     play=false;
                 break;
@@ -50,12 +57,15 @@ public class Player extends BlackJack {
                 break;
                 case "SR":
                     wager=wager*.5;
+                    play=false;
                 break;
                 case "DD":
-                    //hit();
-                    wager=wager*2;
-                    play=false;
+                    hit();
                     faceUp();
+                    wager=wager*2;
+                    System.out.println("Sum: "+sum);
+                   
+                    
                 break;
                 case "ST":
                     //may not get done!!  :(
@@ -63,6 +73,9 @@ public class Player extends BlackJack {
                 default:
                 System.out.println("invalid response try again");
                 break;
+            }
+            if(move.equals("dd")|| move.equals("DD")){
+                play=false;
             }
         return play;
     }
@@ -76,7 +89,7 @@ public class Player extends BlackJack {
     " results in 2x wager and automatic stand after play is made. \n"+
     "-Type ST to split hand: if the two card are of equal value then you can choose\n"+ 
     " to treate the two cards as the 1st cards of a new hand  and\n "+
-    " you'll be dealt two more cards after a second wager is made\n\n\n";
+    " you'll be dealt two more cards after a second wager is made\n";
     return keyBindings;
     }
     public int gethandSum(){
@@ -88,6 +101,7 @@ public class Player extends BlackJack {
                 switch(subRead){    
                     case "ACE":
                     faceUp();
+                    System.out.println("Sum: "+sum);
                     boolean error=false;
                     while(error=!error){
                         try{System.out.println("Do you want the Ace to be a 1 or 11?");   
