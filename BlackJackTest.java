@@ -1,5 +1,16 @@
-import java.util.Scanner;
+/* Josh Benner
+ * CS 145
+ * Lab 4
+ * Jan 24,2023
+ * 
+ * This is the main class where the game is played. 
+ * the objects and methods are used to play a game of 
+ * 21 Player Vs Dealer. 
+ * 
+ */
 
+import java.util.Scanner;
+ 
 public class BlackJackTest{
     public static void main(String[] args) {
         //create objs and intial conditions
@@ -24,19 +35,20 @@ public class BlackJackTest{
         deal.showCard(); // show dealers 2nd card
         System.out.println(" \n");
         playerOne.faceUp(); //show players cards 
-   
         // player goes first
-        do{  play=playerOne.getMove(); // this give the player options. until player stands
+        do{  
+            play=playerOne.getMove(); // this give the player options. until player stands
+            
         }while(play); // if player stands play= false
         playerOne.faceUp();
+        System.out.println();
         //dealer plays hand last
         boolean dealPlay=true;
         do{
             dealPlay=deal.dealerMove(); //similar to players move
-            deal.faceUp();//show dealers cards
         }while(dealPlay); // once dealer is done dealPlay=false
-        System.out.println("\n");
         System.out.println("dealer sum "+ deal.getSum()); //print out dealers sum
+        System.out.println("\n");
         //check to see who wins
         if(deal.getSum()>21 && playerOne.getSum()<21){ //you win
             win=true;

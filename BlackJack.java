@@ -1,51 +1,51 @@
+/*Josh Benner
+ * CS 145
+ * Lab 4
+ * Jan 24 2023
+ * 
+ * BlackJack class holds the behavior and state of the game that is true 
+ * to both the player and the dealer. 
+ */
+
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
 public class BlackJack {
-    private static Stack <String> shuffledDeck = new Stack <String>();
-    private Cards card= new Cards(); 
-    private final int BLACKJACK=21;
-    protected  int sum;
-    protected boolean stand;
-    protected ArrayList<String> hand = new ArrayList<String>();
-    
+    private static Stack <String> shuffledDeck = new Stack <String>(); //stack to hold the shuffled deck;
+    private Cards card= new Cards(); // Card obj to access 4x13 matrix of caards
+    protected  int sum; //add up the cards held by dealer and player
+    protected boolean stand;// when player stands round is over.
+    protected ArrayList<String> hand = new ArrayList<String>();// needed to add the deck of cards here to shuffle deck 
     
     public BlackJack(){
-        shuffledDeck=shuffle();
-        // start with two cards in hand
-        sum=gethandSum();
-        stand= false;
+        shuffledDeck=shuffle(); // shuffle the deck each time new game starts
+        sum=gethandSum(); //sum of cards in hand
+        stand= false; // games is starting so stand is false
     }
-    public void endRound(){
-        if (sum==BLACKJACK){
-        System.out.println("blackJack!");
-        }
-        if (stand==true){
-            System.out.print("End Round");
-        }
-    }
+  
     //shuffles and stores deck in stack
     public Stack <String> shuffle() {
         ArrayList<String> shuffleArray= new ArrayList<String>();
         for(int i=0;i<4;i++){
             for (int j=0;j<13;j++){
-                shuffleArray.add(card.setdeck(i, j)); 
+                shuffleArray.add(card.setdeck(i, j)); //adding cards to the "shuffleArray" to be shuffled
             }  
         }
-        Collections.shuffle(shuffleArray);
+        Collections.shuffle(shuffleArray); // shuffle the new array list
         for (int i=0; i<shuffleArray.size(); i++){
-            shuffledDeck.push(shuffleArray.get(i));
+            shuffledDeck.push(shuffleArray.get(i)); // add the cards from shuffled array into stack
         }
         return shuffledDeck;
         }
-    // deal another card
+    // deal another card and store it in an array list
     public  ArrayList<String> hit(){
          hand.add(shuffledDeck.pop());
-         sum+=gethandSum();
+         sum+=gethandSum(); // card was dealt add up sum of hand
         return hand;
       
-        //return shuffledDeck.pop();
     }
+    //show your cards
     public void faceUp(){
         System.out.print("Your current Hand: ");
         for (int i = 0; i<hand.size();i++){
@@ -53,6 +53,7 @@ public class BlackJack {
     }  
     System.out.println();     
     }
+    // find out how much your hand adds up to. 
     public  int gethandSum(){
     int value=0;
         for(int i=0;i<hand.size();i++){
@@ -110,14 +111,16 @@ public class BlackJack {
         }
         return value;
     }
+    // get the sum of cards in hand
     public int getSum(){
         return sum;
     }
-
+// print out the shuffled deck.... cheat!
     public String toString(){
     
         return shuffledDeck.toString(); // change this before submiting. 
-    }            
+    }  
+    // how does the program work          
      public void getRules(){
         System.out.println("The rules of the game are as follows:\n"+
         "To start the game you'll be asked to make a wager.\n"+    

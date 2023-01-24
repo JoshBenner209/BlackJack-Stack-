@@ -9,8 +9,6 @@
  * get a print out of the matrix.  
  */
 
-
-
 import java.util.Arrays;
 
 public class Cards{
@@ -71,7 +69,7 @@ public class Cards{
         case 5: 
             rank=ranks[5];
             suit= getSuit(i);
-            card=rank;
+            card=rank+" OF "+suit+"'S ";
         break;
         //Seven + suit
         case 6: 
